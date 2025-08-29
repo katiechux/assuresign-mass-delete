@@ -28,6 +28,14 @@ function App() {
 
   // Call Express SOAP API
   const sendToServer = async () => {
+    if (!contextIdInput) {
+      alert("Account Context Identifier is required.");
+      return false;
+    }
+    if (csvData.length < 1 ) {
+      alert("Please select a CSV file.");
+      return false;
+    }
     //debugger;
     try {
       const res = await fetch("/api/send-soap", {
@@ -40,6 +48,7 @@ function App() {
 
       const json = await res.json();
       console.log("Server response:", json);
+      alert("Deletion Requests Submitted! Please monitor server requests.");
       setResponse(json.soapResponse);
     } catch (err) {
       console.error("Error sending SOAP request:", err);
