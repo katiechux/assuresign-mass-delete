@@ -35,15 +35,15 @@ app.use(cors()); // Enable CORS for React frontend
 app.use(express.json());
 
 // Your SOAP service details (replace with real values)
-const SOAP_URL = "https://www.assuresign.net/Services/DocumentNOW/v2/DocumentNOW.svc/Envelopes/text";
-const SOAP_ACTION = "https://www.assuresign.net/Services/DocumentNOW/Envelopes/IEnvelopeService/DeleteEnvelope";
+const SOAP_URL = "https://sb.assuresign.net/Services/DocumentNOW/v2/DocumentNOW.svc/Envelopes/text";
+const SOAP_ACTION = "https://sb.assuresign.net/Services/DocumentNOW/Envelopes/IEnvelopeService/DeleteEnvelope";
 
 // Helper: build a SOAP XML envelope for a chunk of rows
 function buildSoapEnvelope(data, contextId) {
   return `<?xml version="1.0" encoding="utf-8"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <DeleteEnvelope xmlns="https://www.assuresign.net/Services/DocumentNOW/Envelopes">
+    <DeleteEnvelope xmlns="https://sb.assuresign.net/Services/DocumentNOW/Envelopes">
       <Requests>
         ${data
           .map(
@@ -169,7 +169,7 @@ app.post("/api/send-soap", async (req, res) => {
 
         // Optional: Add delay between batches to avoid rate limiting
         if (i < chunks.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 10000)); // 100ms delay
+          await new Promise(resolve => setTimeout(resolve, 10000)); // 10000ms delay
         }
 
       } catch (batchError) {
