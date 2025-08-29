@@ -1,0 +1,14 @@
+{
+  "name": "assuresign-mass-delete-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.0",
+    "node-fetch": "^2.6.12",
+    "xml2js": "^0.6.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
